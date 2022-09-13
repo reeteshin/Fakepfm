@@ -7,7 +7,11 @@ dotenv.config()
 app.use(express.json());
 var port = process.env.PORT || 3000;
 const connect =async () => {
-    return await mongoose.connect("mongodb+srv://1212:1212@cluster0.i5ry6ko.mongodb.net/pfm");
+    return (
+       await mongoose.connect(process.env.MONGO_URL|| 3000, { useNewUrlParser: true })
+        .then(connect => console.log('connected to mongodb..',connect))
+        .catch(e => console.log('could not connect to mongodb', e))
+    )
 };
 
 const TransactionSchema = new mongoose.Schema({
