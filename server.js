@@ -6,8 +6,8 @@ const app = express();
 dotenv.config()
 app.use(express.json());
 var port = process.env.PORT || 3000;
-const connect = () => {
-    return mongoose.connect("mongodb+srv://1212:1212@cluster0.i5ry6ko.mongodb.net/pfm");
+const connect =async () => {
+    return await mongoose.connect("mongodb+srv://1212:1212@cluster0.i5ry6ko.mongodb.net/pfm");
 };
 
 const TransactionSchema = new mongoose.Schema({
@@ -77,8 +77,8 @@ app.get('/transcation', async (req, res) => {
     const transc = await Transction.find()
     return res.send(transc);
 });
-app.listen(port, async () => {
-    await connect().then((ans) => {
+app.listen(port, () => {
+    connect().then((ans) => {
 
         console.log("Connected Successful",process.env.MONGO_URL);
     })
