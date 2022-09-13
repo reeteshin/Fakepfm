@@ -7,7 +7,7 @@ dotenv.config()
 app.use(express.json());
 var port = process.env.PORT || 3000;
 const connect = () => {
-    return mongoose.connect(process.env.MONGO_URL);
+    return mongoose.connect("mongodb+srv://1212:1212@cluster0.i5ry6ko.mongodb.net/pfm");
 };
 
 const TransactionSchema = new mongoose.Schema({
@@ -80,10 +80,11 @@ app.get('/transcation', async (req, res) => {
 app.listen(port, async () => {
     await connect().then((ans) => {
 
-        console.log("Connected Successful");
+        console.log("Connected Successful",process.env.MONGO_URL);
     })
         .catch((err) => {
-            console.log("Error in the Connection");
+
+            console.log("Error in the Connection",process.env.MONGO_URL);
         })
 
     console.log("Port",port);
