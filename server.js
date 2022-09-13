@@ -7,7 +7,7 @@ dotenv.config()
 app.use(express.json());
 var port = process.env.PORT || 3000;
 const connect =async () => {
-    return await mongoose.connect("mongodb+srv://1212:1212@cluster0.i5ry6ko.mongodb.net/pfm");
+    return await mongoose.connect("mongodb+srv://1212:1212@cluster0.i5ry6ko.mongodb.net/?retryWrites=true&w=majority");
 };
 
 const TransactionSchema = new mongoose.Schema({
