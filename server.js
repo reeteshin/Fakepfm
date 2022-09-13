@@ -6,9 +6,9 @@ const app = express();
 dotenv.config()
 app.use(express.json());
 var port = process.env.PORT || 3000;
-const connect =async () => {
+const connect = () => {
     return (
-       await mongoose.connect(process.env.MONGO_URL|| 3000, { useNewUrlParser: true })
+        mongoose.connect(process.env.MONGO_URL|| 3000, { useNewUrlParser: true })
         .then(connect => console.log('connected to mongodb..',connect))
         .catch(e => console.log('could not connect to mongodb', e))
     )
@@ -81,10 +81,10 @@ app.get('/transcation', async (req, res) => {
     const transc = await Transction.find()
     return res.send(transc);
 });
-app.listen(port, () => {
-    connect().then((ans) => {
+app.listen(port, async() => {
+   await connect().then((ans) => {
 
-        console.log("Connected Successful",process.env.MONGO_URL);
+        console.log("Connected Successful",process.env.MONGO_URL,ans);
     })
         .catch((err) => {
 
